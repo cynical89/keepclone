@@ -1,0 +1,21 @@
+{
+  "site":{
+    "port": 8080,
+    "name": "Project name",
+    "secret": "exphbs-boilerplate",
+      "oauth": {
+      "host": "http://127.0.0.1",
+      "github": {
+        "clientID": "OAUTH CLIENT ID FOR GITHUB",
+        "clientSecret": "OAUTH CLIENT SECRET FOR GITHUB"
+      }
+    },
+    "analytics": "Analytics SITE ID"
+  },
+  "deploy":{
+    "username": "YOUR USERNAME",
+    "hostname": "YOUR HOSTNAME",
+    "path": "~/path",
+    "screen": "starter"
+  }
+}
