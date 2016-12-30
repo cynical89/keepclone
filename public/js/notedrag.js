@@ -105,7 +105,7 @@ document.addEventListener("mousemove", function(e) {
 	if(noteDrag.mouseDown[1] && noteDrag.dragTarget.name != "")
 	{
 		var el = document.getElementById(noteDrag.dragTarget.name);
-		noteDrag.dragTarget.x = noteDrag.clamp(noteDrag.dragTarget.x+e.movementX, 0, document.getElementById("main").clientWidth-el.offsetWidth-64);
+		noteDrag.dragTarget.x = noteDrag.clamp(noteDrag.dragTarget.x+e.movementX, 0, document.getElementById("main").clientWidth-el.offsetWidth-32);
 		noteDrag.dragTarget.y = noteDrag.clamp(noteDrag.dragTarget.y+e.movementY, 0, document.getElementById("main").clientHeight-el.offsetHeight-64);
 		el.style.top = noteDrag.dragTarget.y + "px";
 		el.style.left = noteDrag.dragTarget.x + "px";

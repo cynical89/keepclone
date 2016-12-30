@@ -7,18 +7,17 @@
 	</head>
 	<body>
 		<header>
-			{{title}}
+			<span id="title">{{title}}</span>
+			<input id="noteInput"></input>
 		</header>
 		<div id="container">
-
-    {{{body}}}
-
-  </div>
-  <footer>
-    © Some Nerds 2016
-  </footer>
-  {{#if script}}
-    <script src="/js/{{script}}.js"></script>
-  {{/if}}
-</body>
+			{{{body}}}
+		</div>
+		<footer>
+			© Some Nerds 2016
+		</footer>
+		{{#if script}}
+			<script src="/js/{{script}}.js"></script>
+		{{/if}}
+	</body>
 </html>

@@ -47,6 +47,17 @@ footer
 	cursor: default;
 }
 
+#noteInput
+{
+	width: 384px;
+	height: 40px;
+	vertical-align: middle;
+	border: none;
+	font-size: 32px;
+	background-color: #fff;
+	margin-left: 32px;
+}
+
 #container
 {
 	position: absolute;
