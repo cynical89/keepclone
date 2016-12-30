@@ -79,8 +79,10 @@ app.use(function(req, res, next) {
 app.get("/", main.index);
 app.get("/login", main.login);
 app.get("/signup", main.signup);
+app.get("/notes/:id", main.notes)
 app.get("/dashboard", secure.index);
 
+app.post("/notes", main.submitNotes);
 app.post("/login", main.submitLogin);
 app.post("/signup", main.submitSignup);
 
