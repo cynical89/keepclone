@@ -64,7 +64,7 @@ var noteDrag = {
 	},
 	
 	getNoteSpaceDimensions: function() {
-		return {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight-104};
+		return {width: document.documentElement.clientWidth-32, height: document.documentElement.clientHeight-106};
 	},
 	
 	setNoteSpaceDimensions: function(w, h) {
