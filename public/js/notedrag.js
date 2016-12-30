@@ -17,7 +17,7 @@ var noteDrag = {
 				
 	toFront: function(w)
 	{
-		w = parseInt(w.substring(4));
+		w = parseInt(w.substring(5));
 		var el = document.getElementById("noteN"+w);
 		el.style.zIndex = noteDrag.noteCount-1;
 		for(var i = 0; i < noteDrag.noteCount; i++)
@@ -64,7 +64,7 @@ var noteDrag = {
 	},
 	
 	getNoteSpaceDimensions: function() {
-		return {width: document.documentElement.clientWidth-32, height: document.documentElement.clientHeight-106};
+		return {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight-104};
 	},
 	
 	setNoteSpaceDimensions: function(w, h) {
