@@ -8,6 +8,9 @@ const session = require("express-session");
 const morgan = require("morgan");
 const passport = require("passport");
 const expressValidator = require("express-validator");
+// Mongoose connectiont to DB
+mongoose.connect('mongodb://localhost/keepclone');
+var db = mongoose.connection;
 
 
 const main = require("./controllers/main");
@@ -67,11 +70,11 @@ app.use(function (err, req, res, next) {
   res.status(500).send("Something broke!");
 });
 
-// Make our db accessible to our router
-// app.use(function(req, res, next) {
-//   req.db = db;
-//   next();
-// });
+//Make our db accessible to our router
+app.use(function(req, res, next) {
+  req.db = db;
+  next();
+});
 
 app.get("/", main.index);
 app.get("/login", main.login);
