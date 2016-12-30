@@ -1,8 +1,8 @@
 {
   "site":{
     "port": 8080,
-    "name": "Project name",
-    "secret": "exphbs-boilerplate",
+    "name": "Keep Clone",
+    "secret": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "oauth": {
       "host": "http://127.0.0.1",
       "github": {
