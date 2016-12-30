@@ -1,13 +1,13 @@
 body
 {
-	background: #bbb;
+	background: #ddd;
 	color: #444;
 	font-family: Arial;
 }
 
 header
 {
-	background: #eee;
+	background: #0ad;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -15,8 +15,8 @@ header
 	height: 64px;
 	font-size: 48px;
 	line-height: 64px;
-	color: #999;
-	border-bottom: 4px solid #ccc;
+	color: #fff;
+	border-bottom: 4px solid #08b;
 	z-index: 999999999;
 	padding: 0px 0px 0px 16px;
 	-webkit-user-select: none;
@@ -29,7 +29,7 @@ header
 
 footer
 {
-	background: #eee;
+	background: #007ba7;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -38,8 +38,7 @@ footer
 	text-align: center;
 	font-size: 24px;
 	line-height: 32px;
-	color: #999;
-	border-top: 4px solid #ccc;
+	color: #fff;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -51,12 +50,12 @@ footer
 #container
 {
 	position: absolute;
-	top: 70px;
-	bottom: 36px;
+	top: 68px;
+	bottom: 32px;
 	left: 0;
 	right: 0;
 	overflow: auto;
-	box-shadow: 0px 0px 16px 16px #999 inset;
+	box-shadow: 0px 0px 4px 4px #bbb inset;
 	z-index: -9999999999;
 }
 
@@ -73,9 +72,8 @@ footer
 .note
 {
 	position: absolute;
-	background: #eee;
-	border: 4px solid #ccc;
-	box-shadow: -8px 8px 16px 4px #999;
+	background: #fff;
+	box-shadow: -4px 4px 4px 4px #999;
 	width: 224px;
 	min-height: 224px;
 	padding: 16px;
