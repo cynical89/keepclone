@@ -8,7 +8,7 @@ body
 header
 {
 	background: #eee;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -30,7 +30,7 @@ header
 footer
 {
 	background: #eee;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -48,15 +48,26 @@ footer
 	cursor: default;
 }
 
-#main
+#container
 {
 	position: absolute;
 	top: 64px;
-	bottom: 32px;
+	bottom: 36px;
 	left: 0;
 	right: 0;
 	overflow: auto;
 	box-shadow: 0px 0px 16px 16px #999 inset;
+	z-index: -9999999999;
+}
+
+#main
+{
+	position: relative;
+	top: 0px;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+	overflow: auto;
 	z-index: -9999999999;
 }
 

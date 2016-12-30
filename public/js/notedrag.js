@@ -12,6 +12,7 @@
 var noteDrag = {
 	mouseDown: [false, false, false, false],
 	dragTarget: {name: "", x: -1, y: -1},
+	noteSpace: {width: -1, height: -1},
 	noteCount: 5,
 				
 	toFront: function(w)
@@ -40,8 +41,26 @@ var noteDrag = {
 		var el = document.getElementById("w");
 		el.style.userSelect = on;
 		el.style.mozUserSelect = on;
+	},
+	
+	getNoteSpaceDimensions: function() {
+		return {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight-100};
+	},
+	
+	setNoteSpaceDimensions: function(w, h) {
+		var el = document.getElementById("main");
+		el.style.width = w + "px";
+		el.style.height = h + "px";
+		noteDrag.noteSpace = {width: w, height: h};
+	},
+	
+	refreshNoteSpaceDimensions: function() {
+		var dim = noteDrag.getNoteSpaceDimensions();
+		noteDrag.setNoteSpaceDimensions(dim.width, dim.height);
 	}
 };
+
+noteDrag.refreshNoteSpaceDimensions();
 
 document.addEventListener("mousedown", function(e) {
     var target = e.target || e.srcElement,
@@ -79,4 +98,7 @@ document.addEventListener("mouseup", function(e) {
 
 document.onmousedown = function(e) {
 	if(noteDrag.dragTarget.name != "") stopDefault(e);
+};
+
+window.onresize = function() {
 };
