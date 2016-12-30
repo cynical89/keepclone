@@ -51,7 +51,7 @@ footer
 #container
 {
 	position: absolute;
-	top: 64px;
+	top: 70px;
 	bottom: 36px;
 	left: 0;
 	right: 0;
@@ -63,11 +63,10 @@ footer
 #main
 {
 	position: relative;
-	top: 0px;
-	bottom: 0px;
+	top: 0;
+	bottom: 0;
 	left: 0;
 	right: 0;
-	overflow: auto;
 	z-index: -9999999999;
 }
 

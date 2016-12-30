@@ -18,10 +18,10 @@ var noteDrag = {
 	toFront: function(w)
 	{
 		w = parseInt(w.substring(4));
-		var el = document.getElementById("note"+w);
+		var el = document.getElementById("noteN"+w);
 		el.style.zIndex = noteDrag.noteCount-1;
 		for(var i = 0; i < noteDrag.noteCount; i++)
-		if(i != w) document.getElementById("note"+i).style.zIndex--;
+		if(i != w) document.getElementById("noteN"+i).style.zIndex--;
 	},
 	
 	pos: function(el) {
@@ -43,8 +43,28 @@ var noteDrag = {
 		el.style.mozUserSelect = on;
 	},
 	
+	getRightMost: function() {
+		var p = 0;
+		for(var i = 0; i < noteDrag.noteCount; i++)
+		{
+			var el = document.getElementById("noteN"+i);
+			p = Math.max(el.offsetLeft+el.offsetWidth, p);
+		}
+		return p;
+	},
+	
+	getBottomMost: function() {
+		var p = 0;
+		for(var i = 0; i < noteDrag.noteCount; i++)
+		{
+			var el = document.getElementById("noteN"+i);
+			p = Math.max(el.offsetTop+el.offsetHeight, p);
+		}
+		return p;
+	},
+	
 	getNoteSpaceDimensions: function() {
-		return {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight-100};
+		return {width: document.documentElement.clientWidth-32, height: document.documentElement.clientHeight-106};
 	},
 	
 	setNoteSpaceDimensions: function(w, h) {
@@ -58,6 +78,7 @@ var noteDrag = {
 		var dim = noteDrag.getNoteSpaceDimensions();
 		noteDrag.setNoteSpaceDimensions(dim.width, dim.height);
 	}
+
 };
 
 noteDrag.refreshNoteSpaceDimensions();
@@ -68,15 +89,15 @@ document.addEventListener("mousedown", function(e) {
 	
 	noteDrag.mouseDown[e.which] = true;
 	
-	if(e.which == 1 && target.id.indexOf("note") == 0)
+	if(e.which == 1 && target.id.indexOf("noteN") == 0)
 	{
 		var el = document.getElementById(target.id);
 		var pos = noteDrag.pos(el);
-		noteDrag.dragTarget = {name: target.id, x: pos.left-32, y: pos.top-96};
+		noteDrag.dragTarget = {name: target.id, x: pos.left-32+document.getElementById("container").scrollLeft, y: pos.top-96+document.getElementById("container").scrollTop};
 		noteDrag.toFront(target.id);
 	}
 	
-	if(target.parentElement.id.indexOf("note") == 0)
+	if(target.parentElement.id.indexOf("noteN") == 0)
 	noteDrag.toFront(target.parentElement.id);
 });
 
@@ -84,8 +105,8 @@ document.addEventListener("mousemove", function(e) {
 	if(noteDrag.mouseDown[1] && noteDrag.dragTarget.name != "")
 	{
 		var el = document.getElementById(noteDrag.dragTarget.name);
-		noteDrag.dragTarget.x = noteDrag.clamp(noteDrag.dragTarget.x+e.movementX, 0, document.getElementById("main").offsetWidth-el.offsetWidth-64);
-		noteDrag.dragTarget.y = noteDrag.clamp(noteDrag.dragTarget.y+e.movementY, 0, document.getElementById("main").offsetHeight-el.offsetHeight-64);
+		noteDrag.dragTarget.x = noteDrag.clamp(noteDrag.dragTarget.x+e.movementX, 0, document.getElementById("main").clientWidth-el.offsetWidth-64);
+		noteDrag.dragTarget.y = noteDrag.clamp(noteDrag.dragTarget.y+e.movementY, 0, document.getElementById("main").clientHeight-el.offsetHeight-64);
 		el.style.top = noteDrag.dragTarget.y + "px";
 		el.style.left = noteDrag.dragTarget.x + "px";
 	}
@@ -101,4 +122,9 @@ document.onmousedown = function(e) {
 };
 
 window.onresize = function() {
+	var dim = noteDrag.getNoteSpaceDimensions();
+	var w = Math.max(noteDrag.getRightMost()+32, dim.width);
+	var h = Math.max(noteDrag.getBottomMost()+32, dim.height);
+	
+	noteDrag.setNoteSpaceDimensions(w, h);
 };
