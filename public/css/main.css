@@ -57,6 +57,8 @@ footer
 	border: none;
 	font-size: 32px;
 	background-color: #fff;
+	z-index: 999999999;
+	box-shadow: -2px 2px 2px 2px #999;
 }
 
 #container
@@ -90,7 +92,7 @@ footer
 	min-height: 224px;
 	padding: 16px;
 	margin: 32px;
-	margin-top: 64px;
+	margin-top: 16px;
 	cursor: move;
 }
 
