@@ -1,4 +1,4 @@
-body
+﻿body
 {
 	background: #ddd;
 	color: #444;
@@ -49,13 +49,14 @@ footer
 
 #noteInput
 {
-	width: 693px;
+	width: 512px;
 	height: 40px;
+	position: fixed;
+	left: calc(50vw - 256px);
 	vertical-align: middle;
 	border: none;
 	font-size: 32px;
 	background-color: #fff;
-	margin-left: 32px;
 }
 
 #container
@@ -89,6 +90,7 @@ footer
 	min-height: 224px;
 	padding: 16px;
 	margin: 32px;
+	margin-top: 64px;
 	cursor: move;
 }
 
