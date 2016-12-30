@@ -11,6 +11,7 @@ const expressValidator = require("express-validator");
 
 
 const main = require("./controllers/main");
+const secure = require("./controllers/secure");
 
 const app = express();
 
@@ -72,7 +73,13 @@ app.use(function (err, req, res, next) {
 //   next();
 // });
 
-app.use("/", main.index);
+app.get("/", main.index);
+app.get("/login", main.login);
+app.get("/signup", main.signup);
+app.get("/dashboard", secure.index);
+
+app.post("/login", main.submitLogin);
+app.post("/signup", main.submitSignup);
 
 app.set("port", (process.env.PORT || config.site.port));
 
