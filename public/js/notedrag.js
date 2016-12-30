@@ -56,6 +56,9 @@ document.addEventListener("mousedown", function(e) {
 		noteDrag.dragTarget = {name: target.id, x: pos.left-32, y: pos.top-96};
 		noteDrag.toFront(target.id);
 	}
+	
+	if(target.parentElement.id.indexOf("note") == 0)
+	noteDrag.toFront(target.parentElement.id);
 });
 
 document.addEventListener("mousemove", function(e) {
