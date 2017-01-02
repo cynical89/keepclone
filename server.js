@@ -17,6 +17,7 @@ const main = require("./controllers/main");
 const secure = require("./controllers/secure");
 
 const app = express();
+exports.passport = passport;
 
 const config = require("./config.json");
 const viewdir = __dirname + "/views/";
@@ -46,6 +47,8 @@ if(process.env.NODE_ENV = "development") {
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
+
+require("./models/auth.js");
 
 // Express validator
 app.use(expressValidator({
@@ -82,9 +85,18 @@ app.get("/signup", main.signup);
 app.get("/notes/:id", main.notes)
 app.get("/dashboard", secure.index);
 
-app.post("/notes", main.submitNotes);
-app.post("/login", main.submitLogin);
-app.post("/signup", main.submitSignup);
+app.post("/notes", secure.submitNotes);
+
+// Passport Strategy
+app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/dashboard',
+        failureRedirect : '/signup',
+        failureFlash : true }));
+
+app.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/profile',
+        failureRedirect : '/login', 
+        failureFlash : true }));
 
 app.set("port", (process.env.PORT || config.site.port));
 

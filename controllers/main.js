@@ -20,24 +20,16 @@ module.exports.signup = function signup(req, res) {
 };
 
 module.exports.notes = function note(req, res) {
+  let note;
   const id = req.params.id;
-  // lookup in mongo db by id
-console.log(id);
-console.log(req.params);
+  req.db.collection.findOne({_id:id}, (err, doc) => {
+    if (err) {
+      res.status("400").send(err);
+    }
+    note = doc;
+  })
   res.render("notes", {
     title: config.site.name,
-    note: id // note var from mongo
+    note: doc
   });
 }
-
-module.exports.submitNotes = function submitNote(req, res) {
-  res.status(400).send("Posting to notes is not implemented fully")
-}
-
-module.exports.submitLogin = function submitLogin(req, res) {
-  res.status(400).send("Posting to login is not implemented fully");
-};
-
-module.exports.submitSignup = function signup(req, res) {
-  res.status(400).send("Posting to signup is not implemented fully");
-};

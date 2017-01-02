@@ -7,3 +7,7 @@ module.exports.index = function index(req, res) {
     script: "notedrag"
   });
 };
+
+module.exports.submitNotes = function submitNote(req, res) {
+  res.status(400).send("Posting to notes is not implemented fully")
+}
