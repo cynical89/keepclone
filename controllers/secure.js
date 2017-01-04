@@ -1,6 +1,7 @@
 "use strict";
 
 const config = require("../config.json");
+const db = require("../helpers/db");
 const noteModel = require("../models/notes");
 
 let user = null;
@@ -34,7 +35,7 @@ module.exports.notes = function* notes() {
   return this.body = note;
 };
 
-module.exports.edit = function* edit() {
+module.exports.iseditable = function* iseditable() {
   if(!this.params.isEditable) {
     this.status = 400;
     return this.body = "Invalid request.";
@@ -48,7 +49,7 @@ module.exports.edit = function* edit() {
   return note;
 };
 
-module.exports.public = function* public() {
+module.exports.ispublic = function* ispublic() {
   if(!this.params.isPublic) {
     this.status = 400;
     return this.body = "Invalid request.";

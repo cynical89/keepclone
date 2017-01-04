@@ -9,6 +9,7 @@ const Router = require("koa-router");
 const routes = new Router();
 
 const main = require("./controllers/main.js");
+const secure = require("./controllers/secure.js");
 const account = require("./controllers/account.js");
 
 // routes
@@ -20,8 +21,8 @@ routes.get("/signup", main.signup);
 routes.post("/signup", account.signup);
 routes.post("/notes", secure.notes);
 routes.post("/notes/edit", main.edit);
-routes.post("/notes/editable", secure.edit);
-routes.post("/notes/public", secure.public);
+routes.post("/notes/editable", secure.iseditable);
+routes.post("/notes/public", secure.ispublic);
 routes.post("/notes/password", secure.password);
 
 routes.get("/dashboard", secure.index);

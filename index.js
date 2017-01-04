@@ -37,7 +37,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // statically serve assets
-app.use(serve("./assets"));
+app.use(serve("./public"));
 
 // load up the handlebars middlewear
 app.use(hbs.middleware({

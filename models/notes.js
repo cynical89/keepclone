@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  newNote = (title, content, author, isPublic, isEditable, password = null) => {
+  newNote: (title, content, author, isPublic, isEditable, password = null) => {
     const note = {
       title: title,
       content: content,
@@ -11,7 +11,7 @@ module.exports = {
       password: password
     };
   },
-  getUsersNotes = (notes, user) => {
+  getUsersNotes: (notes, user) => {
     let userNotes;
     for (var note of notes) {
       if (note.author = user.id) {
@@ -20,19 +20,19 @@ module.exports = {
     }
     return userNotes;
   },
-  setPublic = (note, isPublic) => {
+  setPublic: (note, isPublic) => {
     note.isPublic = isPublic;
     return note;
   },
-  setEditable = (note, isEditable) => {
+  setEditable: (note, isEditable) => {
     note.isEditable = isEditable;
     return note;
   },
-  setPassword = (note, password) => {
+  setPassword: (note, password) => {
     note.password = password;
     return note;
   },
-  editNote = (note, content) => {
+  editNote: (note, content) => {
     note.content = content;
     return note;
   }

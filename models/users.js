@@ -1,7 +1,5 @@
 "use strict";
 
-const Chance = require("chance");
-const chance = new Chance();
 const db = require("../helpers/db");
 const bcrypt = require("bcrypt");
 
@@ -11,13 +9,12 @@ module.exports = {
 		const user = {
 			error: false,
 			id: username,
-			password: encrypted,
-      uniqueId: chance.hash({length:15});
+			password: encrypted
 		};
 		return user;
 	},
 
-	getUser: function* getUser(username, password {
+	getUser: function* getUser(username, password) {
 		const document = yield db.getDocument(username, "ftgusers");
     if(document.error === true) {
       return {error: true, message: "There was an issue retrieving user"}
