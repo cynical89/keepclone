@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	getUser: function* getUser(username, password) {
-		const document = yield db.getDocument(username, "ftgusers");
+		const document = yield db.getDocument(username, "users");
     if(document.error === true) {
       return {error: true, message: "There was an issue retrieving user"}
     }

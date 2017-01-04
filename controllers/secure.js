@@ -30,7 +30,7 @@ module.exports.notes = function* notes() {
   if (params.password) {
     note = noteModel.setPassword(note, params.password);
   }
-  note = yield db.saveDocument(note);
+  note = yield db.saveDocument(note, "notes");
 
   return this.body = note;
 };
@@ -44,7 +44,7 @@ module.exports.iseditable = function* iseditable() {
     this.status = 400;
     return this.body = "Invalid request.";
   }
-  let note = yield db.getDocument(params.id);
+  let note = yield db.getDocument(params.id, "notes");
   note = noteModel.setEditable(note, params.isEditable);
   return note;
 };
@@ -58,7 +58,7 @@ module.exports.ispublic = function* ispublic() {
     this.status = 400;
     return this.body = "Invalid request.";
   }
-  let note = yield db.getDocument(params.id);
+  let note = yield db.getDocument(params.id, "notes");
   note = noteModel.setPublic(note, params.isPublic);
   return note;
 };
@@ -72,7 +72,7 @@ module.exports.password = function* password() {
     this.status = 400;
     return this.body = "Invalid request.";
   }
-  let note = yield db.getDocument(params.id);
+  let note = yield db.getDocument(params.id, "notes");
   note = noteModel.setPassword(note, params.password);
   return note;
 };

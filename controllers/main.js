@@ -21,7 +21,7 @@ module.exports.notes = function* notes() {
 		this.status = 400;
 		return this.body = "Must supply an id";
 	}
-	const document = yield db.getDocument(this.params.id);
+	const document = yield db.getDocument(this.params.id, "notes");
 	if(document.error === true) {
 		this.status = 400;
 		return document.message;
@@ -57,7 +57,7 @@ module.exports.edit = function* edit() {
 		this.status = 400;
 		return this.body = "You must supply an id.";
 	}
-	let note = yield db.getDocument(params.id);
+	let note = yield db.getDocument(params.id, "notes");
 	if(note.isPublic === false) {
 		this.status = 404;
 		return this.body = "We can't find this note in our system";
