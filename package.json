@@ -4,7 +4,8 @@
   "description": "A quick clone of Google Keep",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "./node_modules/.bin/nodemon -e js,hbs index.js",
+    "server":"node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,7 @@
     "handlebars",
     "passport"
   ],
-  "author": "snollygolly (@snollygolly)",
+  "author": "cynical89",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cynical89/keepclone/issues"
