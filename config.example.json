@@ -1,21 +1,21 @@
 {
   "site":{
-    "port": 8080,
+    "port": 5000,
     "name": "Keep Clone",
-    "secret": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "oauth": {
+    "secret": "keep-clone-is-awesome",
+    "oauth": {
       "host": "http://127.0.0.1",
       "github": {
         "clientID": "OAUTH CLIENT ID FOR GITHUB",
         "clientSecret": "OAUTH CLIENT SECRET FOR GITHUB"
       }
     },
-    "analytics": "Analytics SITE ID"
+    "analytics": "UA-00000000-0"
   },
   "deploy":{
     "username": "YOUR USERNAME",
     "hostname": "YOUR HOSTNAME",
-    "path": "~/path",
-    "screen": "starter"
+    "path": "~/Keep-Clone",
+    "screen": "keep-clone"
   }
 }

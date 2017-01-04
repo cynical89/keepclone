@@ -1,61 +1,51 @@
 "use strict";
+
+const passport = require("../index.js").passport;
 const config = require("../config.json");
-const passport = require("../server.js").passport;
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('../models/user');
+const co = require("co");
 
-module.exports = (passport) => {
-    passport.serializeUser((user, done) => {
-        done(null, user.id);
-    });
+passport.serializeUser((user, done) => {
+	done(null, user);
+});
 
-    passport.deserializeUser((id, done) => {
-        User.findById(id, (err, user) =>{
-            done(err, user);
-        });
-    });
+passport.deserializeUser((user, done) => {
+	done(null, user);
+});
 
-    passport.use('local-signup', new LocalStrategy({
-        usernameField : 'email',
-        passwordField : 'password',
-        passReqToCallback : true 
-    }, (req, email, password, done) => {
-        process.nextTick(() => {
-            User.findOne({ 'local.email' :  email }, (err, user) => {
-                if (err){
-                    return done(err);
-                }
-                if (user) {
-                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                } else {
-                    var newUser = new User();
-                    newUser.local.email    = email;
-                    newUser.local.password = password;
-                    newUser.createUser(newUser, () => {
-                    return done(null, newUser);
-                })
-                }
-            });    
-        });
-    }));
-};
+const GithubStrategy = require("passport-github").Strategy;
+// if we have a port other than 80, add it to our callback url
+let port = "";
+if (config.site.port !== 80) {
+	port = `:${config.site.port}`;
+}
+passport.use(new GithubStrategy({
+	clientID: config.site.oauth.github.clientID,
+	clientSecret: config.site.oauth.github.clientSecret,
+	callbackURL: `${config.site.oauth.host}${port}/auth/github/callback`
+}, (token, tokenSecret, profile, done) => {
+	// retrieve user ...
+	co(function* auth() {
+		// do some async/yield stuff here to get/set profile data
+		done(null, profile);
+	}).catch(function onError(e) {
+		console.error("Something went terribly wrong!");
+		console.error(e.stack);
+		done(e, null);
+	});
+}));
 
-    passport.use('local-login', new LocalStrategy({
-        usernameField : 'email',
-        passwordField : 'password',
-        passReqToCallback : true }, (req, email, password, done) => {
-        User.findOne({ 'local.email' :  email }, (err, user) => {
-            if (err) {
-                return done(err);
-            }
-            if (!user) {
-                return done(null, false, req.flash('loginMessage', 'No user found.'));
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-            }
-            return done(null, user);
-        });
-
-    }));
-
+const LocalStrategy = require("passport-local").Strategy;
+passport.use(new LocalStrategy((username, password, done) => {
+	co(function* auth() {
+		const user = yield userModel.getUser(username, password);
+		if (user.error === true) {
+			done(null, false);
+		} else {
+			done(null, user);
+		}
+	}).catch(function onError(e) {
+		console.error("Something went terribly wrong!");
+		console.error(e.stack);
+		done(e, null);
+	});
+}));

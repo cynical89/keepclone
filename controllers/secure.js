@@ -1,20 +1,77 @@
+"use strict";
+
 const config = require("../config.json");
+const noteModel = require("../models/notes");
 
-let user;
+let user = null;
 
-module.exports.index = function index(req, res) {
-  if(this.isAuthenticated()) {
-  res.render("secure/index", {
-    layout: "secure",
-    title: config.site.name,
-    user: user,
-    script: "notedrag"
-  });
-  } else {
-    res.redirect("/login")
-  }
+module.exports.index = function* index() {
+	if (this.isAuthenticated()) {
+		user = this.session.passport.user;
+	}
+	yield this.render("secure/index", {
+		title: config.site.name,
+		user: user
+	});
 };
 
-module.exports.submitNotes = function submitNote(req, res) {
-  res.status(400).send("Posting to notes is not implemented fully")
-}
+module.exports.notes = function* notes() {
+  const params = this.request.body;
+  if(!params.title && !params.content && !params.author && !params.isPublic
+      && !params.isEditable) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  const author = this.session.passport.user.id;
+  let note = noteModel.newNote(params.title, params.content, author, params.isPublic,
+      params.isEditable);
+
+  if (params.password) {
+    note = noteModel.setPassword(note, params.password);
+  }
+  note = yield db.saveDocument(note);
+
+  return this.body = note;
+};
+
+module.exports.edit = function* edit() {
+  if(!this.params.isEditable) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  if(!this.params.id) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  let note = yield db.getDocument(params.id);
+  note = noteModel.setEditable(note, params.isEditable);
+  return note;
+};
+
+module.exports.public = function* public() {
+  if(!this.params.isPublic) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  if(!this.params.id) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  let note = yield db.getDocument(params.id);
+  note = noteModel.setPublic(note, params.isPublic);
+  return note;
+};
+
+module.exports.password = function* password() {
+  if(!this.params.password) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  if(!this.params.id) {
+    this.status = 400;
+    return this.body = "Invalid request.";
+  }
+  let note = yield db.getDocument(params.id);
+  note = noteModel.setPassword(note, params.password);
+  return note;
+};
