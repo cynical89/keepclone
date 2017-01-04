@@ -67,3 +67,17 @@ exports.removeDocument = function* removeDocument(id, database) {
 		};
 	}
 };
+
+exports.getAllNotes = function* getAllNotes() {
+	try {
+		const db = connectToDatabase("notes");
+		const doc = yield db.viewAsync("getorders/all");
+		doc.error = false;
+		return doc;
+	} catch (err) {
+		return {
+			error: true,
+			message: err
+		};
+	}
+};

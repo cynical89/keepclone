@@ -10,9 +10,17 @@ module.exports.index = function* index() {
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
+		let userNotes;
+		const notes = yield db.getAllNotes();
+		for (var note of notes) {
+			(if note.author === user.id) {
+				userNotes.push(note);
+			}
+		}
 	yield this.render("secure/index", {
 		title: config.site.name,
-		user: user
+		user: user,
+		notes: userNotes
 	});
 };
 
