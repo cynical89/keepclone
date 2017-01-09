@@ -126,5 +126,3 @@ window.onresize = function() {
 	
 	noteDrag.setNoteSpaceDimensions(w, h);
 };
-
-document.body.className = "";
