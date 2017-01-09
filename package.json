@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon -e js,hbs index.js",
-    "server":"node index.js",
+    "server": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +28,7 @@
   "dependencies": {
     "bcryptjs": "^1.0.2",
     "bluebird": "^3.4.7",
+    "chance": "^1.0.4",
     "co": "^4.6.0",
     "cradle": "^0.7.1",
     "koa": "^1.1.2",

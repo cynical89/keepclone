@@ -41,7 +41,7 @@ module.exports.notes = function* notes() {
     this.status = 400;
     return this.body = "Invalid request.";
   }
-  const author = this.session.passport.user.id;
+  const author = this.session.passport.user._id;
   let note = noteModel.newNote(params.title, params.content, author, params.isPublic,
       params.isEditable);
 
@@ -50,7 +50,7 @@ module.exports.notes = function* notes() {
   }
   note = yield db.saveDocument(note, "notes");
 
-  return this.body = note;
+  return this.redirect("/dashboard");
 };
 
 module.exports.iseditable = function* iseditable() {

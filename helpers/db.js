@@ -36,8 +36,7 @@ exports.getDocument = function* getDocument(id, database) {
 	} catch (err) {
 		return {
 			error: true,
-			message: err
-			//message: `DB: Get of [${id}] failed`
+			message: `DB: Get of [${id}] failed`
 		};
 	}
 };
@@ -45,6 +44,7 @@ exports.getDocument = function* getDocument(id, database) {
 // Saves an order document in the database in CouchDB.
 exports.saveDocument = function* saveDocument(document, database) {
 	try {
+		console.log(document);
 		const db = connectToDatabase(database);
 		const returnVal = yield db.saveAsync(document.id, document);
 		document.id = returnVal.id;

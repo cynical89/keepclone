@@ -1,15 +1,20 @@
 "use strict";
 
+const Chance = require("chance");
+const chance = new Chance();
+
 module.exports = {
   newNote: (title, content, author, isPublic, isEditable, password = null) => {
     const note = {
+			id: chance.guid(),
       title: title,
       content: content,
       author: author,
       isPublic: isPublic,
       isEditable: isEditable,
       password: password
-    };
+    }
+		return note;
   },
   getUsersNotes: (notes, user) => {
     let userNotes;
