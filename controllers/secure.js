@@ -10,10 +10,10 @@ module.exports.index = function* index() {
 	if (this.isAuthenticated()) {
 		user = this.session.passport.user;
 	}
-		let userNotes;
+		let userNotes = [];
 		const notes = yield db.getAllNotes();
 		for (var note of notes) {
-			if (note.author === user.id) {
+			if (note.value.author === user._id) {
 				userNotes.push(note);
 			}
 		}
