@@ -86,17 +86,20 @@ footer
 	box-shadow: -4px 6px 3px 3px #aaa;
 	transform: translate(0px, -4px);
 	padding: 0;
+	outline: none;
 }
 
 .bigInput
 {
-	width: 512px;
+	width: 480px;
 	height: 40px;
 	vertical-align: middle;
 	border: none;
-	font-size: 32px;
+	font-size: 28px;
 	background-color: #fff;
 	box-shadow: -2px 2px 2px 2px #999;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 #noteInput
