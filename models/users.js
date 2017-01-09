@@ -15,9 +15,9 @@ module.exports = {
 	},
 
 	getUser: function* getUser(username, password) {
-		const document = yield db.getDocument(username, "users");
+		const document = yield db.getDocument(username, "kcusers");
     if(document.error === true) {
-      return {error: true, message: "There was an issue retrieving user"}
+      return {error: true, message: document.message}
     }
 		const passwordMatch = comparePassword(password, document);
 		if (!passwordMatch) {

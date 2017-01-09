@@ -13,7 +13,7 @@ module.exports.index = function* index() {
 		let userNotes;
 		const notes = yield db.getAllNotes();
 		for (var note of notes) {
-			(if note.author === user.id) {
+			if (note.author === user.id) {
 				userNotes.push(note);
 			}
 		}
@@ -24,9 +24,19 @@ module.exports.index = function* index() {
 	});
 };
 
+module.exports.newnote = function* newnote() {
+	if (this.isAuthenticated()) {
+		user = this.session.passport.user;
+	}
+	yield this.render("secure/newnote", {
+		title: config.site.name,
+		user: user
+	});
+};
+
 module.exports.notes = function* notes() {
   const params = this.request.body;
-  if(!params.title && !params.content && !params.author && !params.isPublic
+  if(!params.title && !params.content && !params.isPublic
       && !params.isEditable) {
     this.status = 400;
     return this.body = "Invalid request.";

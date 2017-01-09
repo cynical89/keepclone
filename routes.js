@@ -17,7 +17,8 @@ const account = require("./controllers/account.js");
 routes.get("/", main.index);
 routes.get("/notes/:id", main.notes);
 routes.get("/signup", main.signup);
-
+routes.get("/success", main.success);
+routes.get("/newnote", secure.newnote);
 routes.post("/signup", account.signup);
 routes.post("/notes", secure.notes);
 routes.post("/notes/edit", main.edit);

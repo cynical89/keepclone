@@ -14,7 +14,11 @@ CouchDBError.prototype = Error.prototype;
 // Connects to a database and returns the DB object.
 const connectToDatabase = (dbName) => {
 	try {
-		return new(cradle.Connection)().database(dbName);
+		return new(cradle.Connection)(config.site.db.host, config.site.db.port, {auth: {
+			username: config.site.db.username,
+			password: config.site.db.password
+		}}).database(dbName);
+		// return new(cradle.Connection)().database(dbName);
 	} catch (err) {
 		throw new CouchDBError(`DB: Get: Connection to database [${dbName}] failed`);
 	}
@@ -32,7 +36,8 @@ exports.getDocument = function* getDocument(id, database) {
 	} catch (err) {
 		return {
 			error: true,
-			message: `DB: Get of [${id}] failed`
+			message: err
+			//message: `DB: Get of [${id}] failed`
 		};
 	}
 };
@@ -71,7 +76,7 @@ exports.removeDocument = function* removeDocument(id, database) {
 exports.getAllNotes = function* getAllNotes() {
 	try {
 		const db = connectToDatabase("notes");
-		const doc = yield db.viewAsync("getorders/all");
+		const doc = yield db.viewAsync("getnotes/all");
 		doc.error = false;
 		return doc;
 	} catch (err) {

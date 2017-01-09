@@ -10,7 +10,13 @@
         "clientSecret": "OAUTH CLIENT SECRET FOR GITHUB"
       }
     },
-    "analytics": "UA-00000000-0"
+    "analytics": "UA-00000000-0",
+		"db": {
+			"host": "http://138.197.214.239",
+			"port": 5984,
+			"username": "keepclone",
+			"password": "keepohc17"
+		}
   },
   "deploy":{
     "username": "YOUR USERNAME",

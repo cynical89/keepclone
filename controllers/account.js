@@ -12,7 +12,7 @@ module.exports.login = function* login() {
 
 module.exports.signup = function* signup() {
 	const params = this.request.body;
-	if(!params.username) {
+	if(!params.email) {
 		this.status = 400;
 		return this.body = "You must supply a username";
 	}
@@ -20,11 +20,11 @@ module.exports.signup = function* signup() {
 		this.status = 400;
 		return this.body = "You must supply a password";
 	}
-	let user = yield db.getDocument(params.username, "users");
+	let user = yield db.getDocument(params.email, "kcusers");
 	if (user.error === true) {
-		user = userModel.newUser(params.username, params.password);
-		user = yield db.saveDocument(user, "users");
-		return this.redirect("/login");
+		user = userModel.newUser(params.email, params.password);
+		user = yield db.saveDocument(user, "kcusers");
+		return this.body = user;
 	} else {
 		this.status = 400;
 		return this.body = "An account with this username already exists";
@@ -32,6 +32,6 @@ module.exports.signup = function* signup() {
 }
 
 module.exports.logout = function* logout() {
-	yield this.logout();
+	this.logout();
 	return this.redirect("/");
 };

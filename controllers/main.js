@@ -16,6 +16,16 @@ module.exports.index = function* index() {
 	});
 };
 
+module.exports.success = function* success() {
+	if (this.isAuthenticated()) {
+		user = this.session.passport.user;
+	}
+	yield this.render("success", {
+		title: config.site.name,
+		user: user
+	});
+};
+
 module.exports.notes = function* notes() {
 	if(!this.params.id) {
 		this.status = 400;

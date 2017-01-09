@@ -2,6 +2,7 @@
 
 const passport = require("../index.js").passport;
 const config = require("../config.json");
+const userModel = require("../models/users");
 const co = require("co");
 
 passport.serializeUser((user, done) => {
